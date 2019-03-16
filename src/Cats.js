@@ -18,6 +18,8 @@ class Cats extends Component {
     const headers = {
       'x-api-key': 'd24b427d-578e-4609-86bd-b36555c3875c'
     }
+    // If you want to add another 10 random cats uncomment this >>
+    //
     // fetch('https://api.thecatapi.com/v1/images/search?limit=10', {headers})
     // .then(response => response.json())
     // .then(data => {

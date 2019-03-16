@@ -17,6 +17,7 @@ class Login extends Component {
         .then(response => {
             console.log('Response: ', response);
             this.props.setIsAuthorized(true);
+            this.props.history.push('/')
         })
         .catch(error => {
             console.log('error');
