@@ -3,6 +3,7 @@ import './App.css';
 
 import Register from './Register';
 import Cats from './Cats';
+import Login from './Login'
 
 class App extends Component {
 
@@ -28,6 +29,9 @@ class App extends Component {
       <div>
         <div>
           <Register setIsAuthorized={this.setIsAuthorized} />
+        </div>
+        <div>
+          <Login setIsAuthorized={this.setIsAuthorized} />
         </div>
         <div>
           {this.renderCats()}
