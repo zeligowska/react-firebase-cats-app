@@ -6,6 +6,7 @@ import './App.css';
 import Register from './Register';
 import Cats from './Cats';
 import Login from './Login'
+import Logout from './Logout'
 
 class App extends Component {
 
@@ -34,6 +35,7 @@ class App extends Component {
             <Link to="/"><button>Home</button></Link>
             <Link to="/login"><button>Login</button></Link>
             <Link to="/register"><button>Register</button></Link>
+            <Link to="/logout"><button>Logout</button></Link>
           </div>
           <Route exact path="/" component={this.renderCats()} />
           <Route path="/register" render = {
@@ -41,6 +43,9 @@ class App extends Component {
           } />
           <Route path="/login" render = {
             (props) => <Login {...props} setIsAuthorized={this.setIsAuthorized} />
+          } />
+          <Route path="/logout" render = {
+            (props) => <Logout {...props} setIsAuthorized={this.setIsAuthorized} />
           } />
           {/* <div>
             {this.renderCats()}
