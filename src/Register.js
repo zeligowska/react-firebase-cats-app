@@ -16,7 +16,6 @@ class Register extends Component {
         .createUserWithEmailAndPassword(this.state.email, this.state.password)
         .then(response => {
             console.log('Response: ', response);
-            this.props.setIsAuthorized(true);
             this.props.history.push('/')
         })
         .catch(error => {

@@ -6,7 +6,6 @@ class Logout extends Component {
 componentDidMount() {
     auth.signOut()
     .then(response => {
-        this.props.setIsAuthorized(false);
         this.props.history.push('/');
     })
     .catch(error => {

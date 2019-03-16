@@ -7,6 +7,7 @@ import Register from './Register';
 import Cats from './Cats';
 import Login from './Login'
 import Logout from './Logout'
+import { auth } from './firebase';
 
 class App extends Component {
 
@@ -14,8 +15,14 @@ class App extends Component {
     isAuthorized: false
   }
 
-  setIsAuthorized = (value) => {
-    this.setState({ isAuthorized: value });
+  componentDidMount() {
+    auth.onAuthStateChanged(user => {
+      if(user) {
+        this.setState({ isAuthorized: true });
+      } else {
+        this.setState({ isAuthorized: false });
+      }
+    })
   }
 
   renderCats() {
@@ -38,15 +45,9 @@ class App extends Component {
             <Link to="/logout"><button>Logout</button></Link>
           </div>
           <Route exact path="/" component={this.renderCats()} />
-          <Route path="/register" render = {
-            (props) => <Register {...props} setIsAuthorized={this.setIsAuthorized} />
-          } />
-          <Route path="/login" render = {
-            (props) => <Login {...props} setIsAuthorized={this.setIsAuthorized} />
-          } />
-          <Route path="/logout" render = {
-            (props) => <Logout {...props} setIsAuthorized={this.setIsAuthorized} />
-          } />
+          <Route path="/register" component={Register} />
+          <Route path="/login" component={Login} />
+          <Route path="/logout" component={Logout} />
           {/* <div>
             {this.renderCats()}
           </div> */}

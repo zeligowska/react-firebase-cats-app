@@ -16,15 +16,14 @@ class Login extends Component {
         .signInWithEmailAndPassword(this.state.email, this.state.password)
         .then(response => {
             console.log('Response: ', response);
-            this.props.setIsAuthorized(true);
-            this.props.history.push('/')
+            this.props.history.push('/');
         })
         .catch(error => {
             console.log('error');
-        })
+        });
 
         console.log(this.state);
-        this.setState({ email: '', password: '' })
+        this.setState({ email: '', password: '' });
         event.preventDefault();
     }
 
