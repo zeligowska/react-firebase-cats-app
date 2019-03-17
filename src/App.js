@@ -10,6 +10,7 @@ import Logout from './Logout'
 import { auth } from './firebase';
 import Avatar from './Avatar';
 import Menu from './Menu';
+import Upload from './Upload';
 
 class App extends Component {
 
@@ -58,6 +59,7 @@ class App extends Component {
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <Route path="/logout" component={Logout} />
+          <Route path="/upload" component={Upload} />
           {/* <div>
             {this.renderCats()}
           </div> */}

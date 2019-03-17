@@ -19,5 +19,8 @@ export default ({ isAuthorized }) => (
     <li style={createStyles(isAuthorized)}>
       <Link to="/logout"><button>Logout</button></Link>
     </li>
+    <li style={createStyles(isAuthorized)}>
+      <Link to="/upload"><button>Upload</button></Link>
+    </li>
   </ul>
 );
