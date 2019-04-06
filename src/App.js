@@ -5,11 +5,11 @@ import { connect } from 'react-redux';
 import './App.css';
 
 import Register from './auth/containers/Register';
-import Cats from './Cats';
+import Cats from './cats/containers/Cats';
 import Login from './auth/containers/Login'
 import Logout from './auth/containers/Logout'
 import { auth } from './firebase';
-import Avatar from './Avatar';
+import Avatar from './ui/components/Avatar';
 import Menu from './Menu';
 import Upload from './Upload';
 import Notifications from './ui/containers/Notifications';
