@@ -21,7 +21,7 @@ class Cats extends Component {
                 {cat.name}
               </div>
               <div>
-                <img src={cat.url} alt="" />
+                <img src={cat.url} alt="" width='800px' height='auto' />
               </div>
             </div>
           ))}
