@@ -13,7 +13,7 @@ import Avatar from './Avatar';
 import Menu from './Menu';
 import Upload from './Upload';
 import Notifications from './ui/containers/Notifications';
-
+import { login, logout} from './auth/actions';
 
 class App extends Component {
 
@@ -21,13 +21,10 @@ class App extends Component {
     // db.ref('/cats').remove();
     auth.onAuthStateChanged(user => {
       if (user) {
-        this.setState({
-          isAuthorized: true,
-          user: user.providerData[0]
-        });
+        this.props.login(user.providerData[0]);
         // console.log(auth.currentUser);
       } else {
-        this.setState({ isAuthorized: false });
+        this.props.logout();
       }
     })
   }
@@ -73,4 +70,9 @@ const mapStateToProps = state => ({
   user: state.auth.user
 })
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => ({
+  login: (user) => dispatch(login(user)),
+  logout: () => dispatch(logout())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
