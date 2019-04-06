@@ -14,6 +14,7 @@ import Menu from './Menu';
 import Upload from './Upload';
 import Notifications from './ui/containers/Notifications';
 import { login, logout} from './auth/actions';
+import { showNotifications } from './ui/actions'
 
 class App extends Component {
 
@@ -22,6 +23,7 @@ class App extends Component {
     auth.onAuthStateChanged(user => {
       if (user) {
         this.props.login(user.providerData[0]);
+        this.props.showNotifications('You are logged in')
         // console.log(auth.currentUser);
       } else {
         this.props.logout();
@@ -72,7 +74,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   login: (user) => dispatch(login(user)),
-  logout: () => dispatch(logout())
+  logout: () => dispatch(logout()),
+  showNotifications: (message) => dispatch(showNotifications(message))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
