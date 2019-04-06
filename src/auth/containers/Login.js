@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { auth, googleProvider, facebookProvider } from './firebase';
+import { auth, googleProvider, facebookProvider } from '../../firebase';
 
 class Login extends Component {
 

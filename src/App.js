@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import './App.css';
 
-import Register from './Register';
+import Register from './auth/containers/Register';
 import Cats from './Cats';
-import Login from './Login'
-import Logout from './Logout'
+import Login from './auth/containers/Login'
+import Logout from './auth/containers/Logout'
 import { auth } from './firebase';
 import Avatar from './Avatar';
 import Menu from './Menu';
 import Upload from './Upload';
+import Notifications from './ui/containers/Notifications';
+
 
 class App extends Component {
-
-  state = {
-    isAuthorized: false,
-    user: {}
-  }
 
   componentDidMount() {
     // db.ref('/cats').remove();
@@ -35,7 +33,7 @@ class App extends Component {
   }
 
   renderCats() {
-    if (this.state.isAuthorized) {
+    if (this.props.isAuthorized) {
       return Cats;
     }
     return null;
@@ -43,30 +41,36 @@ class App extends Component {
 
 
   render() {
-    const { cats } = this.state;
+    //const { cats } = this.state;
     return (
-      <BrowserRouter>
-        <div>
-          <Menu isAuthorized={this.state.isAuthorized} />
-          {this.state.isAuthorized ? <Avatar user={this.state.user} /> : null}
-          {/* <div>
+        <BrowserRouter>
+          <div>
+            <Notifications />
+            <Menu isAuthorized={this.props.isAuthorized} />
+            {this.props.isAuthorized ? <Avatar user={this.props.user} /> : null}
+            {/* <div>
             <Link to="/"><button>Home</button></Link>
             <Link to="/login"><button>Login</button></Link>
             <Link to="/register"><button>Register</button></Link>
             <Link to="/logout"><button>Logout</button></Link>
           </div> */}
-          <Route exact path="/" component={this.renderCats()} />
-          <Route path="/register" component={Register} />
-          <Route path="/login" component={Login} />
-          <Route path="/logout" component={Logout} />
-          <Route path="/upload" component={Upload} />
-          {/* <div>
+            <Route exact path="/" component={this.renderCats()} />
+            <Route path="/register" component={Register} />
+            <Route path="/login" component={Login} />
+            <Route path="/logout" component={Logout} />
+            <Route path="/upload" component={Upload} />
+            {/* <div>
             {this.renderCats()}
           </div> */}
-        </div>
-      </BrowserRouter>
+          </div>
+        </BrowserRouter>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  isAuthorized: state.auth.isAuthorized,
+  user: state.auth.user
+})
+
+export default connect(mapStateToProps)(App);
