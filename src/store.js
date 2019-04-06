@@ -1,18 +1,27 @@
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import logger from 'redux-logger';
+import thunk from 'redux-thunk';
 
+import authReducer from './auth/reducer';
 import uiReducer from './ui/reducer';
-import authReducer from './auth/reducer'
-import catsReducer from './cats/reducer'
+import catsReducer from './cats/reducer';
 
 const rootReducer = combineReducers({
-    ui: uiReducer,
     auth: authReducer,
-    cats: catsReducer
-})
+    cats: catsReducer,
+    ui: uiReducer
+});
+
+const composeEnhancers =
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+const middleware = [logger, thunk];
 
 const store = createStore(
     rootReducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    composeEnhancers(
+        applyMiddleware(...middleware)
+    )
 );
 
 export default store;
